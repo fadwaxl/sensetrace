@@ -1,0 +1,344 @@
+
+# D2RQ Namespace  
+@prefix d2rq:   <http://www.wiwiss.fu-berlin.de/suhl/bizer/D2RQ/0.1#>.
+
+#http://www.wiwiss.fu-berlin.de/suhl/bizer/D2RQ/0.1#> .
+# Namespace of the ontology
+@prefix measure-1sec: <urn:sensor:measure:1sec:> .
+@prefix measure-1min: <urn:sensor:measure:1min:> .
+@prefix measure-15min: <urn:sensor:measure:15min:> .
+@prefix measure-1h: <urn:sensor:measure:1h:> .
+@prefix measure-1d: <urn:sensor:measure:1d:> .
+@prefix measure-1month: <urn:sensor:measure:1m:> .
+@prefix measure-1y: <urn:sensor:measure:1y:> .
+@prefix error: <urn:sensor:error:> .
+@prefix avg1min: <urn:sensor:avg1min:> .
+#@prefix : <:measurement> .
+# Namespace of the mapping file; does not appear in mapped data
+@prefix map: <file:///Users/d2r/example.ttl#> .
+
+
+# Other namespaces
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> . 
+@prefix jdbc: <http://d2rq.org/terms/jdbc/> .
+@prefix sens:  <urn:measurement:> .
+
+@prefix db: <> .
+@prefix vocab: <vocab/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dc:      <http://purl.org/dc/elements/1.0/> .
+
+
+
+
+map:Configuration a d2rq:Configuration;
+    d2rq:useAllOptimizations true.
+    
+map:database a d2rq:Database;
+	   d2rq:jdbcDriver "org.postgresql.Driver";
+	d2rq:jdbcDSN "jdbc:postgresql://127.0.0.1/pvdata";
+	d2rq:username "just_queries";
+	d2rq:password "sensetrace";
+	jdbc:autoReconnect "true";
+	jdbc:zeroDateTimeBehavior "convertToNull";
+	#d2rq:allowDistinct  "false";
+	.
+
+    
+# Table 1sec 1sec-measurement
+    map:1sec-measurement a d2rq:ClassMap;
+    d2rq:dataStorage map:database;
+    d2rq:class  measure-1sec:measurement;
+    d2rq:uriPattern "urn:measurement:1sec:@@measurement.sensorid@@-@@measurement.timestamp@@";
+    .
+    
+map:1sec-measurement_timestamp a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:1sec-measurement;
+    d2rq:column "measurement.timestamp";
+    d2rq:datatype xsd:dateTime;
+    d2rq:property  measure-1sec:timestamp;
+    .
+    
+map:1sec-measurement_value a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:1sec-measurement;
+    d2rq:column "measurement.value";
+    d2rq:datatype xsd:double;
+    d2rq:property  measure-1sec:value;
+    .
+    
+  map:1sec-measurement_value_cor a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:1sec-measurement;
+    d2rq:column "measurement.value_cor";
+    d2rq:datatype xsd:double;
+    d2rq:property  measure-1sec:value_cor;
+    .
+    
+ map:1sec-measurement_sensorid a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:1sec-measurement;
+    d2rq:column "measurement.sensorid";
+    d2rq:datatype xsd:integer;
+    d2rq:property  measure-1sec:sensorid;
+    .
+
+ map:1sec-measurement_clid a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:1sec-measurement;
+    d2rq:column "measurement.clid";
+    d2rq:datatype xsd:integer;
+    d2rq:property  measure-1sec:clid;
+    .
+
+
+# Table 1min-measurement
+    map:1min-measurement a d2rq:ClassMap;
+    d2rq:dataStorage map:database;
+    d2rq:class  measure-1min:measurement;
+    d2rq:uriPattern "urn:measurement:1min:@@avg1min.sensorid@@-@@avg1min.timestamp@@";
+    .
+    
+map:1min-measurement_timestamp a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:1min-measurement;
+    d2rq:column "avg1min.timestamp";
+    d2rq:datatype xsd:dateTime;
+    d2rq:property  measure-1min:timestamp;
+    .
+    
+map:1min-measurement_value a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:1min-measurement;
+    d2rq:column "avg1min.value";
+    d2rq:datatype xsd:double;
+    d2rq:property  measure-1min:value;
+    .
+    
+  map:1min-measurement_value_cor a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:1min-measurement;
+    d2rq:column "avg1min.value_cor";
+    d2rq:datatype xsd:double;
+    d2rq:property  measure-1min:value_cor;
+    .
+    
+ map:1min-measurement_sensorid a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:1min-measurement;
+    d2rq:column "avg1min.sensorid";
+    d2rq:datatype xsd:integer;
+    d2rq:property  measure-1min:sensorid;
+    .
+
+ map:1min-measurement_clid a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:1min-measurement;
+    d2rq:column "avg1min.clid";
+    d2rq:datatype xsd:integer;
+    d2rq:property  measure-1min:clid;
+    .
+
+# Table 15min-measurement
+    map:15min-measurement a d2rq:ClassMap;
+    d2rq:dataStorage map:database;
+    d2rq:class  measure-15min:measurement;
+    d2rq:uriPattern "urn:measurement:15min:@@avg15min.sensorid@@-@@avg15min.timestamp@@";
+    .
+    
+map:15min-measurement_timestamp a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:15min-measurement;
+    d2rq:column "avg15min.timestamp";
+    d2rq:datatype xsd:dateTime;
+    d2rq:property  measure-15min:timestamp;
+    .
+    
+map:15min-measurement_value a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:15min-measurement;
+    d2rq:column "avg15min.value";
+    d2rq:datatype xsd:double;
+    d2rq:property  measure-15min:value;
+    .
+    
+  map:15min-measurement_value_cor a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:15min-measurement;
+    d2rq:column "avg15min.value_cor";
+    d2rq:datatype xsd:double;
+    d2rq:property  measure-15min:value_cor;
+    .
+    
+ map:15min-measurement_sensorid a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:15min-measurement;
+    d2rq:column "avg15min.sensorid";
+    d2rq:datatype xsd:integer;
+    d2rq:property  measure-15min:sensorid;
+    .
+
+ map:15min-measurement_clid a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:15min-measurement;
+    d2rq:column "avg15min.clid";
+    d2rq:datatype xsd:integer;
+    d2rq:property  measure-15min:clid;
+    .
+
+# Table 1h-measurement
+    map:1h-measurement a d2rq:ClassMap;
+    d2rq:dataStorage map:database;
+    d2rq:class  measure-1h:measurement;
+    d2rq:uriPattern "urn:measurement:1h:@@avg1h.sensorid@@-@@avg1h.timestamp@@";
+    .
+    
+map:1h-measurement_timestamp a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:1h-measurement;
+    d2rq:column "avg1h.timestamp";
+    d2rq:datatype xsd:dateTime;
+    d2rq:property  measure-1h:timestamp;
+    .
+    
+map:1h-measurement_value a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:1h-measurement;
+    d2rq:column "avg1h.value";
+    d2rq:datatype xsd:double;
+    d2rq:property  measure-1h:value;
+    .
+    
+  map:1h-measurement_value_cor a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:1h-measurement;
+    d2rq:column "avg1h.value_cor";
+    d2rq:datatype xsd:double;
+    d2rq:property  measure-1h:value_cor;
+    .
+    
+ map:1h-measurement_sensorid a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:1h-measurement;
+    d2rq:column "avg1h.sensorid";
+    d2rq:datatype xsd:integer;
+    d2rq:property  measure-1h:sensorid;
+    .
+
+ map:1h-measurement_clid a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:1h-measurement;
+    d2rq:column "avg1h.clid";
+    d2rq:datatype xsd:integer;
+    d2rq:property  measure-1h:clid;
+    .
+
+# Table 1d-measurement
+    map:1d-measurement a d2rq:ClassMap;
+    d2rq:dataStorage map:database;
+    d2rq:class  measure-1d:measurement;
+    d2rq:uriPattern "urn:measurement:1d:@@avg1d.sensorid@@-@@avg1d.timestamp@@";
+    .
+    
+map:1d-measurement_timestamp a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:1d-measurement;
+    d2rq:column "avg1d.timestamp";
+    d2rq:datatype xsd:dateTime;
+    d2rq:property  measure-1d:timestamp;
+    .
+    
+map:1d-measurement_value a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:1d-measurement;
+    d2rq:column "avg1d.value";
+    d2rq:datatype xsd:double;
+    d2rq:property  measure-1d:value;
+    .
+    
+  map:1d-measurement_value_cor a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:1d-measurement;
+    d2rq:column "avg1d.value_cor";
+    d2rq:datatype xsd:double;
+    d2rq:property  measure-1d:value_cor;
+    .
+    
+ map:1d-measurement_sensorid a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:1d-measurement;
+    d2rq:column "avg1d.sensorid";
+    d2rq:datatype xsd:integer;
+    d2rq:property  measure-1d:sensorid;
+    .
+
+ map:1d-measurement_clid a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:1d-measurement;
+    d2rq:column "avg1d.clid";
+    d2rq:datatype xsd:integer;
+    d2rq:property  measure-1d:clid;
+    .
+
+# Table 1month-measurement
+    map:1month-measurement a d2rq:ClassMap;
+    d2rq:dataStorage map:database;
+    d2rq:class  measure-1month:measurement;
+    d2rq:uriPattern "urn:measurement:1month:@@avg1month.sensorid@@-@@avg1month.timestamp@@";
+    .
+    
+map:1month-measurement_timestamp a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:1month-measurement;
+    d2rq:column "avg1month.timestamp";
+    d2rq:datatype xsd:dateTime;
+    d2rq:property  measure-1month:timestamp;
+    .
+    
+map:1month-measurement_value a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:1month-measurement;
+    d2rq:column "avg1month.value";
+    d2rq:datatype xsd:double;
+    d2rq:property  measure-1month:value;
+    .
+    
+  map:1month-measurement_value_cor a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:1month-measurement;
+    d2rq:column "avg1month.value_cor";
+    d2rq:datatype xsd:double;
+    d2rq:property  measure-1month:value_cor;
+    .
+    
+ map:1month-measurement_sensorid a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:1month-measurement;
+    d2rq:column "avg1month.sensorid";
+    d2rq:datatype xsd:integer;
+    d2rq:property  measure-1month:sensorid;
+    .
+
+ map:1month-measurement_clid a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:1month-measurement;
+    d2rq:column "avg1month.clid";
+    d2rq:datatype xsd:integer;
+    d2rq:property  measure-1month:clid;
+    .
+    
+    
+ # Table 1year-measurement
+    map:1y-measurement a d2rq:ClassMap;
+    d2rq:dataStorage map:database;
+    d2rq:class  measure-1y:measurement;
+    d2rq:uriPattern "urn:measurement:1y:@@avg1year.sensorid@@-@@avg1year.timestamp@@";
+    .
+    
+map:1year-measurement_timestamp a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:1y-measurement;
+    d2rq:column "avg1year.timestamp";
+    d2rq:datatype xsd:dateTime;
+    d2rq:property  measure-1y:timestamp;
+    .
+    
+map:1year-measurement_value a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:1y-measurement;
+    d2rq:column "avg1year.value";
+    d2rq:datatype xsd:double;
+    d2rq:property  measure-1y:value;
+    .
+    
+  map:1year-measurement_value_cor a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:1y-measurement;
+    d2rq:column "avg1year.value_cor";
+    d2rq:datatype xsd:double;
+    d2rq:property  measure-1y:value_cor;
+    .
+    
+ map:1year-measurement_sensorid a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:1y-measurement;
+    d2rq:column "avg1year.sensorid";
+    d2rq:datatype xsd:integer;
+    d2rq:property  measure-1y:sensorid;
+    .
+
+ map:measurement_clid a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:1y-measurement;
+    d2rq:column "avg1year.clid";
+    d2rq:datatype xsd:integer;
+    d2rq:property  measure-1y:clid;
+    .
+    
