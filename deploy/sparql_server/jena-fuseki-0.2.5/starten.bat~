@@ -1,0 +1,1 @@
+java -classpath f:\jena\jena-fuseki-0.2.5\fuseki-server.jar;f:\jena\jena-fuseki-0.2.5\lib\* org.apache.jena.fuseki.FusekiCmd  --config f:\jena\jena-fuseki-0.2.5\config2.ttl
