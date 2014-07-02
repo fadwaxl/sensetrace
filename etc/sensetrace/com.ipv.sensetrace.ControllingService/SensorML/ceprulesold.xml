@@ -1,0 +1,334 @@
+<?xml version="1.0"?>
+<SensorML xmlns:swe="http://www.opengis.net/swe" xmlns:gml="http://www.opengis.net/gml"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink"
+	xsi:schemaLocation="http://www.opengis.net/sensorML
+http://vast.uah.edu/schemas/sensorML/1.0.30/base/sensorML.xsd"
+	version="1.0">
+	<System id="urn:classify">
+		<!--============================ -->
+		<!-- Station Discovery Metadata -->
+		<!--============================ -->
+		<description>
+			<swe:Discussion>
+				Define all CEP-Rules in this file! Types: classify,
+				error, help.
+				Events produced by error-rules are written to error
+				table. Events
+				produced by classify rules are written to
+				CEP-Classify-table.
+				Rules of type help are just handled internal in
+				Jtalis and
+				output events for other rules.
+				Important!!! Variables have
+				to start with a BIG letter.
+				Event names have to start with a small
+				one!
+			</swe:Discussion>
+		</description>
+		<identification>
+			<IdentifierList>
+				<identifier name="longName">
+					<Term qualifier="urn:ogc:def:identifier:longName">
+						CEP Rules
+					</Term>
+				</identifier>
+				<identifier name="shortName">
+					<Term qualifier="urn:ogc:def:identifier:shortName">
+						CEP Rules
+					</Term>
+				</identifier>
+			</IdentifierList>
+		</identification>
+		<contact>
+			<ResponsibleParty gml:id="ipv_weather_station_contact">
+				<organizationName>Universität Stuttgart - Institut für Photovoltaik
+				</organizationName>
+				<contactInfo>
+					<address>
+						<electronicMailAddress>hendrik.adler@ipv.uni-stuttgart.de
+						</electronicMailAddress>
+					</address>
+				</contactInfo>
+			</ResponsibleParty>
+		</contact>
+
+		<!--================= -->
+		<!-- Station Outputs -->
+		<!--================= -->
+		<outputs>
+			<OutputList>
+				<output name="CEPRules">
+
+					<swe:DataGroup>
+
+						<swe:component name="acspike">
+							<swe:Quantity definition="acspike" window="60" type="error"
+								replacesensor="19" creationdate="2013-09-03" active="true"
+								ceprule="acspike(Time1-1,Time2+10,interpolate)&lt;-sensor('1sec_Sensor19', Value1, Time1,Time2) 
+								where (Value1&gt;2100)" />
+						</swe:component>
+
+						<swe:component name="negative_acspike">
+							<swe:Quantity definition="negativeacspike" window="60"
+								type="classify" clid="2" creationdate="2013-09-03" active="true"
+								ceprule="negativeacspike(Time1+1,Time2)&lt;-sensor('1sec_Sensor19', Value1, Time1,Time2) 
+								where (Value1&lt;0.01)" />
+						</swe:component>
+
+
+
+						<!-- <swe:component name="no_data_sensor23"> -->
+						<!-- <swe:Quantity definition="no_data_sensor23" window="60" -->
+						<!-- type="helper" creationdate="2013-09-03" active="true" -->
+						<!-- ceprule="no_data_sensor23(Value23,TimeFrom23,TimeTo23)&lt;-sensor('Sensor23', 
+							Value23, TimeFrom23,TimeTo23) -->
+						<!-- where ((TimeTo23-TimeFrom23)&gt;3599)" /> -->
+						<!-- </swe:component> -->
+						<!-- <swe:component name="stable_radiance"> -->
+						<!-- <swe:Quantity definition="stable_radiance" window="30000" -->
+						<!-- type="helper" clid="10" creationdate="2013-09-03" active="true" -->
+						<!-- ceprule="stable_radiance(TimeFrom,TimeTo,Value)&lt;- -->
+						<!-- sensor('Sensor24', Value, TimeFrom, TimeTo) -->
+						<!-- or sensor('Sensor25', Value, TimeFrom, TimeTo) -->
+						<!-- where ( -->
+						<!-- (TimeTo-TimeFrom)&gt;120,(TimeTo-TimeFrom)&lt;900)" /> -->
+						<!-- </swe:component> -->
+
+
+						<!-- <swe:component name="radiation_aggr"> -->
+						<!-- <swe:Quantity definition="radiation_aggr" window="86500" -->
+						<!-- type="classify" clid="12" creationdate="2013-09-03" active="true" -->
+						<!-- ceprule=" radiation_aggr(TimeFrom, TimeTo)&lt;- -->
+						<!-- sensor('1day_Sensor24', Value24, TimeFrom, TimeTo) -->
+						<!-- equals sensor('1day_Sensor25', Value25, TimeFrom, TimeTo)" /> -->
+						<!-- </swe:component> -->
+
+
+						<swe:component name="days_with_high_radiance">
+							<swe:Quantity definition="days_with_high_radiance" window="86400"
+								type="classify" clid="30" creationdate="2014-02-01" active="false"
+								ceprule=" days_with_high_radiance(TimeFrom, TimeTo, Value24,Value25,Value26,Value27,Value28,Value29)&lt;-
+								  sensor('1day_Sensor24', Value24, TimeFrom, TimeTo) 
+								  where (Value24&gt;100)" />
+						</swe:component>
+						
+						<swe:component name="d">
+							<swe:Quantity definition="d" window="86400"
+								type="classify" clid="31" creationdate="2014-02-01" active="true"
+								ceprule="minute_change_in_radiance(TimeTo24, TimeFrom25)&lt;-
+								d(Counter) <- start_aggr 'seq' aggregate(count,a(Y),Counter).
+								  sensor('1min_Sensor24', Value24, TimeFrom24, TimeTo24) meets sensor('1min_Sensor24', Value25, TimeFrom25, TimeTo25)
+								  where ((Value24-Value25)&gt;20)" />
+						</swe:component>
+						
+						<swe:component name="minute_change_in_radiance">
+							<swe:Quantity definition="minute_change_in_radiance" window="86400"
+								type="classify" clid="31" creationdate="2014-02-01" active="true"
+								ceprule="minute_change_in_radiance(TimeTo24, TimeFrom25)&lt;-
+								d(Counter) <- start_aggr 'seq' aggregate(count,a(Y),Counter).
+								  sensor('1min_Sensor24', Value24, TimeFrom24, TimeTo24) meets sensor('1min_Sensor24', Value25, TimeFrom25, TimeTo25)
+								  where ((Value24-Value25)&gt;20)" />
+						</swe:component>
+						
+						<swe:component name="more_then_ten">
+							<swe:Quantity definition="more_then_ten" window="86400"
+								type="classify" clid="32" creationdate="2014-02-01" active="true"
+								ceprule="more_then_ten(TimeFrom24, TimeTo24)&lt;-
+								 minute_change_in_radiance(TimeFrom26, TimeTo26) or sensor('1day_Sensor24', Value24, TimeFrom24, TimeTo24) /" />
+						</swe:component>
+
+						<swe:component name="radiation_aggr">
+							<swe:Quantity definition="radiation_aggr" window="86400"
+								type="helper" clid="12" creationdate="2013-09-03" active="true"
+								ceprule=" radiation_aggr(TimeFrom, TimeTo, Value24,Value25,Value26,Value27,Value28,Value29)&lt;-
+								  sensor('1day_Sensor24', Value24, TimeFrom, TimeTo) 
+								  equals  sensor('1day_Sensor25', Value25, TimeFrom, TimeTo) 
+								   equals sensor('1day_Sensor26', Value26, TimeFrom, TimeTo) 
+								   equals sensor('1day_Sensor27', Value27, TimeFrom, TimeTo) 
+								   equals sensor('1day_Sensor28', Value28, TimeFrom, TimeTo)
+							   equals sensor('1day_Sensor29', Value29, TimeFrom, TimeTo)" />
+						</swe:component>
+
+						<swe:component name="derivation_g_c_si2">
+							<swe:Quantity definition="derivation_g_c_si2"
+								window="86500" type="classify" clid="12" creationdate="2013-09-03"
+								active="true"
+								ceprule="derivation_g_c_si2(TimeFrom,TimeTo)&lt;-
+								radiation_aggr(TimeFrom, TimeTo, Value24,Value25,Value26,Value27,Value28,Value29)
+								where ((Value24&gt;((Value25+Value26+Value27+Value28+Value29)/5+50)); 
+								(Value24&lt;((Value25+Value26+Value27+Value28+Value29)/5)-50))" />
+						</swe:component>
+						<swe:component name="derivation_g_c_si3">
+							<swe:Quantity definition="derivation_g_c_si3"
+								window="86500" type="classify" clid="13" creationdate="2013-09-03"
+								active="true"
+								ceprule="derivation_g_c_si3(TimeFrom,TimeTo)&lt;-
+								radiation_aggr(TimeFrom, TimeTo, Value24,Value25,Value26,Value27,Value28,Value29)
+								where ((Value25&gt;((Value24+Value26+Value27+Value28+Value29)/5+50)); 
+								(Value25&lt;((Value24+Value26+Value27+Value28+Value29)/5)-50))" />
+						</swe:component>
+						<swe:component name="derivation_g_c_si4">
+							<swe:Quantity definition="derivation_g_c_si4"
+								window="86500" type="classify" clid="14" creationdate="2013-09-03"
+								active="true"
+								ceprule="derivation_g_c_si4(TimeFrom,TimeTo)&lt;-
+								radiation_aggr(TimeFrom, TimeTo, Value24,Value25,Value26,Value27,Value28,Value29)
+								where ((Value26&gt;((Value25+Value24+Value27+Value28+Value29)/5+50)); 
+								(Value26&lt;((Value25+Value24+Value27+Value28+Value29)/5)-50))" />
+						</swe:component>
+						<swe:component name="derivation_g_c_si5">
+							<swe:Quantity definition="derivation_g_c_si5"
+								window="86500" type="classify" clid="15" creationdate="2013-09-03"
+								active="true"
+								ceprule="derivation_g_c_si5(TimeFrom,TimeTo)&lt;-
+								radiation_aggr(TimeFrom, TimeTo, Value24,Value25,Value26,Value27,Value28,Value29)
+								where ((Value27&gt;((Value25+Value24+Value26+Value28+Value29)/5+50)); 
+								(Value27&lt;((Value25+Value24+Value26+Value28+Value29)/5)-50))" />
+						</swe:component>
+						<swe:component name="derivation_g_c_si6">
+							<swe:Quantity definition="derivation_g_c_si6"
+								window="86500" type="classify" clid="16" creationdate="2013-09-03"
+								active="true"
+								ceprule="derivation_g_c_si6(TimeFrom,TimeTo)&lt;-
+								radiation_aggr(TimeFrom, TimeTo, Value24,Value25,Value26,Value27,Value28,Value29)
+								where ((Value28&gt;((Value25+Value26+Value27+Value24+Value29)/5+50)); 
+								(Value28&lt;((Value25+Value26+Value27+Value24+Value29)/5)-50))" />
+						</swe:component>
+
+						<swe:component name="derivation_g_c_si7">
+							<swe:Quantity definition="derivation_g_c_si7"
+								window="86500" type="classify" clid="17" creationdate="2013-09-03"
+								active="false"
+								ceprule="derivation_g_c_si7(TimeFrom,TimeTo)&lt;-
+								radiation_aggr(TimeFrom, TimeTo, Value24,Value25,Value26,Value27,Value28,Value29)
+								where ((Value29&gt;((Value25+Value26+Value27+Value28+Value24)/5+50)); 
+								(Value29&lt;((Value25+Value26+Value27+Value28+Value24)/5)-50))" />
+						</swe:component>
+
+						<swe:component name="derivation_stg_sol220_p_dc">
+							<swe:Quantity definition="derivation_stg_sol220_p_dc"
+								window="86400" type="classify" clid="18" creationdate="2013-09-03"
+								active="true"
+								ceprule="derivation_stg_sol220_p_dc(TimeFrom,TimeTo)&lt;-
+								radiation_aggr(TimeFrom, TimeTo, Value24,Value25,Value26,Value27,Value28,Value29)
+								and sensor('1day_Sensor17', Value17, TimeFrom, TimeTo) 
+									where ((Value17&gt;((Value25+Value26+Value27+Value28+Value24)*1.6/5)); 
+								(Value17&lt;((Value25+Value26+Value27+Value28+Value24)*1.1/5)))" />
+						</swe:component>
+
+						<swe:component name="over_ratio_amperage_gcsi2_sol220">
+							<swe:Quantity definition="over_ratio_amperage_gcsi2_sol220"
+								window="86400" type="classify" clid="19" creationdate="2013-09-03"
+								active="false"
+								ceprule="over_ratio_amperage_gcsi2_sol220(TimeFrom,TimeTo-1)&lt;-
+								sensor('1min_Sensor24', Value24, TimeFrom, TimeTo) 
+								and sensor('1min_Sensor15', Value15, TimeFrom, TimeTo) 
+									where (Value15&gt;(Value24*0.008))" />
+						</swe:component>
+						<swe:component name="ratio_amperage_gcsi2_sol220">
+							<swe:Quantity definition="ratio_amperage_gcsi2_sol220"
+								window="86400" type="classify" clid="20" creationdate="2013-09-03"
+								active="true"
+								ceprule="ratio_amperage_gcsi2_sol220(TimeFrom,TimeTo-1)&lt;-
+								sensor('1min_Sensor24', Value24, TimeFrom, TimeTo) 
+								and sensor('1min_Sensor15', Value15, TimeFrom, TimeTo) 
+									where  
+								(Value15&gt;(Value24*0.0024),Value15&lt;(Value24*0.008))" />
+						</swe:component>
+
+						<swe:component name="minute_stable_gcsi2_in_range">
+							<swe:Quantity definition="minute_stable_gcsi2_in_range"
+								window="900" type="classify" clid="21" creationdate="2013-09-03"
+								active="true"
+								ceprule="minute_stable_gcsi2_in_range(TimeFroma,TimeTob-1)&lt;-
+								  sensor('1min_Sensor24', Valuea, TimeFroma, TimeToa) 
+								  meets  sensor('1min_Sensor24', Valueb, TimeFromb, TimeTob) 
+								 	where (Valuea&gt;(Valueb-3),Valuea&lt;(Valueb+3),Valuea&gt;100,Valuea&lt;1000)" />
+						</swe:component>
+
+						<swe:component name="minute_stable_pyrano_in_range">
+							<swe:Quantity definition="minute_stable_pyrano_in_range"
+								window="900" type="classify" clid="22" creationdate="2013-09-03"
+								active="true"
+								ceprule="minute_stable_pyrano_in_range(TimeFroma,TimeTob-1)&lt;-
+								  sensor('1min_Sensor22', Valuea, TimeFroma, TimeToa) 
+								  meets  sensor('1min_Sensor22', Valueb, TimeFromb, TimeTob) 
+								 	where (Valuea&gt;(Valueb-3),Valuea&lt;(Valueb+3),Valuea&gt;100,Valuea&lt;1000)" />
+						</swe:component>
+
+						<swe:component name="second_stable_gcsi2_in_range">
+							<swe:Quantity definition="second_stable_gcsi2_in_range"
+								window="900" type="classify" clid="23" creationdate="2013-09-03"
+								active="true"
+								ceprule="second_stable_gcsi2_in_range(TimeFroma,TimeToa-1)&lt;-
+								  sensor('1sec_Sensor24', Valuea, TimeFroma, TimeToa) 
+								 	where ((TimeToa-TimeFroma)&gt;129,Valuea&gt;100,
+								 	Valuea&lt;1000)" />
+						</swe:component>
+						<swe:component name="second_stable_pyrano_in_range">
+							<swe:Quantity definition="second_stable_pyrano_in_range"
+								window="900" type="classify" clid="24" creationdate="2013-09-03"
+								active="true"
+								ceprule="second_stable_pyrano_in_range(TimeFroma,TimeToa-1)&lt;-
+								  sensor('1sec_Sensor22', Valuea, TimeFroma, TimeToa) 
+								 	where ((TimeToa-TimeFroma)&gt;129,Valuea&gt;100,
+								 	Valuea&lt;1000)" />
+						</swe:component>
+						<!-- <swe:component name="no_change_g_c_si2"> -->
+						<!-- <swe:Quantity definition="no_change_g_c_si2" -->
+						<!-- window="40000" type="classify" clid="4" creationdate="2013-09-03" -->
+						<!-- active="true" -->
+						<!-- ceprule="no_change_g_c_si2(TimeFrom,TimeTo)&lt;- -->
+						<!-- sensor('Sensor24', Value, TimeFrom, TimeTo) -->
+						<!-- where ((Value&gt;10),(TimeTo-TimeFrom&gt;1800))" /> -->
+						<!-- </swe:component> -->
+
+
+						<!-- <swe:component name="no_change_g_c_si3_nc"> -->
+						<!-- <swe:Quantity definition="no_change_g_c_Si3_nc" -->
+						<!-- window="40000" type="classify" clid="6" creationdate="2013-09-03" -->
+						<!-- active="true" -->
+						<!-- ceprule="no_change_g_c_si3_nc(TimeFrom,TimeTo)&lt;- -->
+						<!-- sensor('Sensor25', Value, TimeFrom, TimeTo) -->
+						<!-- where ((Value&gt;10),(TimeTo-TimeFrom&gt;1800))" /> -->
+						<!-- </swe:component> -->
+						<!-- <swe:component name="derivation_g_c_si3"> -->
+						<!-- <swe:Quantity definition="derivation_g_c_si3" -->
+						<!-- window="300" type="classify" clid="3" creationdate="2013-09-03" -->
+						<!-- active="true" -->
+						<!-- ceprule="derivation_g_c_si3(TimeFrom25,TimeTo25,TimeFrom,TimeTo)&lt;- -->
+						<!-- stable_radiance(TimeFrom,TimeTo,Value) -->
+						<!-- par sensor('Sensor25', Value25, TimeFrom25, TimeTo25) -->
+						<!-- where (((Value25&gt;(Value+20)); -->
+						<!-- (Value25&lt;(Value-20))),(TimeFrom25-TimeFrom&lt;30),(TimeFrom25-TimeFrom&gt;(-30)))" 
+							/> -->
+						<!-- </swe:component> -->
+						<!-- <swe:component name="derivation_g_c_si4"> -->
+						<!-- <swe:Quantity definition="derivation_g_c_si4" -->
+						<!-- window="300" type="classify" clid="4" creationdate="2013-09-03" -->
+						<!-- active="true" -->
+						<!-- ceprule="derivation_g_c_si4(TimeFrom26,TimeTo26,TimeFrom,TimeTo)&lt;- -->
+						<!-- stable_radiance(TimeFrom,TimeTo,Value) -->
+						<!-- par sensor('Sensor26', Value26, TimeFrom26, TimeTo26) -->
+						<!-- where (((Value26&gt;(Value+20)); -->
+						<!-- (Value26&lt;(Value-20))),(TimeFrom26-TimeFrom&lt;30),(TimeFrom26-TimeFrom&gt;(-30)))" 
+							/> -->
+						<!-- </swe:component> -->
+
+						<swe:component name="radiation_over_1050">
+							<swe:Quantity definition="radiation_over_1050"
+								window="600" type="classify" clid="1" creationdate="2013-09-03"
+								active="false"
+								ceprule="radiation_over_normal_limit(Time1,Time2)&lt;-sensor('Sensor24',Value1,Time1,Time2)  
+								where ((Value1&gt;1050))" />
+						</swe:component>
+
+
+
+
+					</swe:DataGroup>
+				</output>
+			</OutputList>
+		</outputs>
+	</System>
+</SensorML>
