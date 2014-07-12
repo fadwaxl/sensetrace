@@ -1,0 +1,128 @@
+<?xml version="1.0"?>
+<SensorML xmlns:swe="http://www.opengis.net/swe" xmlns:gml="http://www.opengis.net/gml"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink"
+	xsi:schemaLocation="http://www.opengis.net/sensorML
+http://vast.uah.edu/schemas/sensorML/1.0.30/base/sensorML.xsd"
+	version="1.0">
+	<System id="urn:stg_1:ase250">
+		<!--============================ -->
+		<!-- Station Discovery Metadata -->
+		<!--============================ -->
+		<description>
+			<swe:Discussion>
+				Solarmodules of type Schott Solar ASE-260-DG-FT 250Wp. Description in the manual "Jahresenergieerträge
+				unterschiedlicher Photovoltaik-Technologien bei verschiedenen klimatischen Bedingungen
+				- Bastian Zinßer"
+			</swe:Discussion>
+		</description>
+		<identification>
+			<IdentifierList>
+				<identifier name="longName">
+					<Term qualifier="urn:ogc:def:identifier:longName">
+						Schott Solar ASE-260-DG-FT 250Wp
+					</Term>
+				</identifier>
+				<identifier name="shortName">
+					<Term qualifier="urn:ogc:def:identifier:shortName">
+						Schott Solar ASE-260-DG-FT 250Wp
+					</Term>
+				</identifier>
+			</IdentifierList>
+		</identification>
+		<contact>
+			<ResponsibleParty gml:id="ipv_contact">
+				<organizationName>Universität Stuttgart - Institut für Photovoltaik
+				</organizationName>
+				<contactInfo>
+					<address>
+						<electronicMailAddress>hendrik.adler@ipv.uni-stuttgart.de
+						</electronicMailAddress>
+					</address>
+				</contactInfo>
+			</ResponsibleParty>
+		</contact>
+		<!--========================== -->
+		<!-- Station Coordinate Frame -->
+		<!--========================== -->
+
+		<!--================= -->
+		<!-- Station Outputs -->
+		<!--================= -->
+		<outputs>
+			<OutputList>
+				<output name="moduleMeasurements">
+
+					<swe:DataGroup>
+					<swe:component name="E_AC">
+							<swe:Quantity definition="E_AC#08"
+								uom="urn:ogc:def:unit:kilowatthours" sensorid="58"
+								creationdate="2006-05-31" decimalplace="3"
+								type="avg-1s" lowerLimit="0" upperLimit="10000"
+								mysqlid="58" />
+						</swe:component>
+						
+						<swe:component name="P_AC_actual">
+							<swe:Quantity definition="P_AC#08_actual"
+								uom="ogc:def:unit:kilowatthours" sensorid="57"
+								creationdate="2006-05-31" decimalplace="0"
+								type="avg-1s" lowerLimit="0" upperLimit="1400"
+							    mysqlid="57" />
+						</swe:component>
+
+						<swe:component name="E_DC">
+							<swe:Quantity definition="E_DC#08" uom="ogc:def:unit:kilowatthours"
+								sensorid="56"  creationdate="2006-05-31"
+								decimalplace="0" type="avg-1s" lowerLimit="0" upperLimit="10000"
+								mysqlid="56" />
+						</swe:component>
+
+						<swe:component name="P_DC_1Sec">
+							<swe:Quantity definition="P_DC#08_1Sec" uom="ogc:def:unit:watt"
+								sensorid="55"  creationdate="2006-05-31"
+								decimalplace="1" type="avg-1s" lowerLimit="-10" upperLimit="1400"
+							    mysqlid="55" />
+						</swe:component>
+						<swe:component name="T_mod_1Sec">
+							<swe:Quantity definition="T_mod#08_1Sec" uom="ogc:def:unit:celsius"
+								sensorid="54"  creationdate="2006-05-31"
+								decimalplace="1" type="avg-1s" lowerLimit="-30" upperLimit="90"
+								mysqlid="54" />
+						</swe:component>
+									<swe:component name="I_DC_1Sec">
+							<swe:Quantity definition="I_DC#08_1Sec" uom="ogc:def:unit:ampere"
+								sensorid="53"  creationdate="2006-05-31"
+								decimalplace="3" type="avg-1s" lowerLimit="-0.02" upperLimit="7.8"
+								mysqlid="53" />
+						</swe:component>
+						
+						<swe:component name="V_DC_1Sec">
+							<swe:Quantity definition="V_DC#08_1Sec" uom="ogc:def:unit:voltage"
+								sensorid="52" creationdate="2006-05-31"
+								decimalplace="1" type="avg-1s" lowerLimit="-10" upperLimit="350"
+								mysqlid="52" />
+						</swe:component>
+
+
+					</swe:DataGroup>
+				</output>
+			</OutputList>
+		</outputs>
+		<!--================================= -->
+		<!-- System Communication Interfaces -->
+		<!--================================= -->
+		<interfaces>
+			<InterfaceList>
+				<connection>
+					<Link>
+						<source ref="192.168.1.102/media/m01/mem285/memory.mem" />
+						<destination ref="ftp" />
+					</Link>
+					<Link2>
+						<source ref="ipe08_ASE250" />
+						<destination ref="folder" />
+					</Link2>
+				</connection>
+			</InterfaceList>
+		</interfaces>
+	</System>
+</SensorML>

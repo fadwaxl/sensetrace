@@ -1,0 +1,128 @@
+<?xml version="1.0"?>
+<SensorML xmlns:swe="http://www.opengis.net/swe" xmlns:gml="http://www.opengis.net/gml"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink"
+	xsi:schemaLocation="http://www.opengis.net/sensorML
+http://vast.uah.edu/schemas/sensorML/1.0.30/base/sensorML.xsd"
+	version="1.0">
+	<System id="urn:stg_1:bp185">
+		<!--============================ -->
+		<!-- Station Discovery Metadata -->
+		<!--============================ -->
+		<description>
+			<swe:Discussion>
+				Solarmodules of type 	BP Solar BP7185S. Description in the manual "Jahresenergieerträge
+				unterschiedlicher Photovoltaik-Technologien bei verschiedenen klimatischen Bedingungen
+				- Bastian Zinßer"
+			</swe:Discussion>
+		</description>
+		<identification>
+			<IdentifierList>
+				<identifier name="longName">
+					<Term qualifier="urn:ogc:def:identifier:longName">
+						BP Solar BP7185S
+					</Term>
+				</identifier>
+				<identifier name="shortName">
+					<Term qualifier="urn:ogc:def:identifier:shortName">
+							BP Solar BP7185S
+					</Term>
+				</identifier>
+			</IdentifierList>
+		</identification>
+		<contact>
+			<ResponsibleParty gml:id="ipv_contact">
+				<organizationName>Universität Stuttgart - Institut für Photovoltaik
+				</organizationName>
+				<contactInfo>
+					<address>
+						<electronicMailAddress>hendrik.adler@ipv.uni-stuttgart.de
+						</electronicMailAddress>
+					</address>
+				</contactInfo>
+			</ResponsibleParty>
+		</contact>
+		<!--========================== -->
+		<!-- Station Coordinate Frame -->
+		<!--========================== -->
+
+		<!--================= -->
+		<!-- Station Outputs -->
+		<!--================= -->
+		<outputs>
+			<OutputList>
+				<output name="moduleMeasurements">
+
+					<swe:DataGroup>
+					<swe:component name="E_AC">
+							<swe:Quantity definition="E_AC#09"
+								uom="urn:ogc:def:unit:kilowatthours" sensorid="65"
+								creationdate="2006-05-31" decimalplace="3"
+								type="avg-1s" lowerLimit="0" upperLimit="10000"
+								mysqlid="65" />
+						</swe:component>
+						
+						<swe:component name="P_AC_actual">
+							<swe:Quantity definition="P_AC#09_actual"
+								uom="ogc:def:unit:kilowatthours" sensorid="64"
+								creationdate="2006-05-31" decimalplace="0"
+								type="avg-1s" lowerLimit="0" upperLimit="1400"
+							    mysqlid="64" />
+						</swe:component>
+
+						<swe:component name="E_DC">
+							<swe:Quantity definition="E_DC#09" uom="ogc:def:unit:kilowatthours"
+								sensorid="63"  creationdate="2006-05-31"
+								decimalplace="0" type="avg-1s" lowerLimit="0" upperLimit="10000"
+								mysqlid="63" />
+						</swe:component>
+
+						<swe:component name="P_DC_1Sec">
+							<swe:Quantity definition="P_DC#09_1Sec" uom="ogc:def:unit:watt"
+								sensorid="62"  creationdate="2006-05-31"
+								decimalplace="1" type="avg-1s" lowerLimit="-10" upperLimit="1400"
+							    mysqlid="62" />
+						</swe:component>
+						<swe:component name="T_mod_1Sec">
+							<swe:Quantity definition="T_mod#09_1Sec" uom="ogc:def:unit:celsius"
+								sensorid="61"  creationdate="2006-05-31"
+								decimalplace="1" type="avg-1s" lowerLimit="-30" upperLimit="90"
+								mysqlid="61" />
+						</swe:component>
+									<swe:component name="I_DC_1Sec">
+							<swe:Quantity definition="I_DC#09_1Sec" uom="ogc:def:unit:ampere"
+								sensorid="60"  creationdate="2006-05-31"
+								decimalplace="3" type="avg-1s" lowerLimit="-0.02" upperLimit="7.8"
+								mysqlid="60" />
+						</swe:component>
+						
+						<swe:component name="V_DC_1Sec">
+							<swe:Quantity definition="V_DC#09_1Sec" uom="ogc:def:unit:voltage"
+								sensorid="59" creationdate="2006-05-31"
+								decimalplace="1" type="avg-1s" lowerLimit="-10" upperLimit="350"
+								mysqlid="59" />
+						</swe:component>
+
+
+					</swe:DataGroup>
+				</output>
+			</OutputList>
+		</outputs>
+		<!--================================= -->
+		<!-- System Communication Interfaces -->
+		<!--================================= -->
+		<interfaces>
+			<InterfaceList>
+				<connection>
+					<Link>
+						<source ref="192.168.1.102/media/m01/mem286/memory.mem" />
+						<destination ref="ftp" />
+					</Link>
+						<Link2>
+						<source ref="ipe09_BP185" />
+						<destination ref="folder" />
+					</Link2>
+				</connection>
+			</InterfaceList>
+		</interfaces>
+	</System>
+</SensorML>

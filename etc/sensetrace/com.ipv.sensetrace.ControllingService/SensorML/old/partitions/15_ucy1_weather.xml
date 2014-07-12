@@ -1,0 +1,145 @@
+<?xml version="1.0"?>
+<SensorML xmlns:swe="http://www.opengis.net/swe" xmlns:gml="http://www.opengis.net/gml"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink"
+	xsi:schemaLocation="http://www.opengis.net/sensorML
+http://vast.uah.edu/schemas/sensorML/1.0.30/base/sensorML.xsd"
+	version="1.0">
+	<System id="urn:ucy_1:weather">
+		<!--============================ -->
+		<!-- Station Discovery Metadata -->
+		<!--============================ -->
+		<description>
+			<swe:Discussion>
+				Simple Weather Station in Stuttart measuring
+				temperature, pressure,
+				wind and rain fall
+			</swe:Discussion>
+		</description>
+		<identification>
+			<IdentifierList>
+				<identifier name="longName">
+					<Term qualifier="urn:ogc:def:identifier:longName">
+						Weather Monitoring Stuttgart for temperature,
+						wind and radiation
+					</Term>
+				</identifier>
+				<identifier name="shortName">
+					<Term qualifier="urn:ogc:def:identifier:shortName">
+						Weather Monitoring Stuttgart
+					</Term>
+				</identifier>
+			</IdentifierList>
+		</identification>
+		<contact>
+			<ResponsibleParty gml:id="ipv_contact">
+				<organizationName>Universität Stuttgart - Institut für Photovoltaik
+				</organizationName>
+				<contactInfo>
+					<address>
+						<electronicMailAddress>hendrik.adler@ipv.uni-stuttgart.de
+						</electronicMailAddress>
+					</address>
+				</contactInfo>
+			</ResponsibleParty>
+		</contact>
+		<!--========================== -->
+		<!-- Station Coordinate Frame -->
+		<!--========================== -->
+
+		<!--================= -->
+		<!-- Station Outputs -->
+		<!--================= -->
+		<outputs>
+			<OutputList>
+				<output name="weatherMeasurements">
+
+					<swe:DataGroup>
+						<swe:component name="G_c-Si1_1Sec">
+							<swe:Quantity definition="G_c-Si1_1Sec" uom="urn:ogc:def:unit:WperSm"
+								sensorid="123" creationdate="2006-05-31" decimalplace="0" type="avg-1s"
+								lowerLimit="-10" upperLimit="1225" mysqlid="123" />
+						</swe:component>
+						<swe:component name="G_c-Si2_1Sec">
+							<swe:Quantity definition="G_c-Si2_1Sec" uom="urn:ogc:def:unit:WperSm"
+								sensorid="124" creationdate="2006-05-31" decimalplace="0" type="avg-1s"
+								lowerLimit="-10" upperLimit="1225" mysqlid="124" />
+						</swe:component>
+						<swe:component name="G_c-Si3_1Sec">
+							<swe:Quantity definition="G_c-Si3_1Sec" uom="urn:ogc:def:unit:WperSm"
+								sensorid="125" creationdate="2006-05-31" decimalplace="0" type="avg-1s"
+								lowerLimit="-10" upperLimit="1225" mysqlid="125" />
+						</swe:component>
+						<swe:component name="G_c-Si4_1Sec">
+							<swe:Quantity definition="G_c-Si4_1Sec" uom="urn:ogc:def:unit:WperSm"
+								sensorid="126" creationdate="2006-05-31" decimalplace="0" type="avg-1s"
+								lowerLimit="-10" upperLimit="1225" mysqlid="126" />
+						</swe:component>
+						<swe:component name="G_c-Si5_1Sec">
+							<swe:Quantity definition="G_c-Si5_1Sec" uom="urn:ogc:def:unit:WperSm"
+								sensorid="127" creationdate="2006-05-31" decimalplace="0" type="avg-1s"
+								lowerLimit="-10" upperLimit="1225" mysqlid="127" />
+						</swe:component>
+						<swe:component name="G_c-Si6_1Sec">
+							<swe:Quantity definition="G_c-Si6_1Sec" uom="urn:ogc:def:unit:WperSm"
+								sensorid="128" creationdate="2006-05-31" decimalplace="0" type="avg-1s"
+								lowerLimit="-10" upperLimit="1225" mysqlid="128" />
+						</swe:component>
+						<swe:component name="G_c-Si7_1Sec">
+							<swe:Quantity definition="G_c-Si7_1Sec" uom="urn:ogc:def:unit:WperSm"
+								sensorid="129" creationdate="2006-05-31" decimalplace="0" type="avg-1s"
+								lowerLimit="-10" upperLimit="1225" mysqlid="129" />
+						</swe:component>
+						<swe:component name="G_c-Si8_1Sec">
+							<swe:Quantity definition="G_c-Si8_1Sec" uom="urn:ogc:def:unit:WperSm"
+								sensorid="130" creationdate="2006-05-31" decimalplace="1" type="avg-1s"
+								lowerLimit="-10" upperLimit="1225" mysqlid="130" />
+						</swe:component>
+						<swe:component name="T_room_1Sec">
+							<swe:Quantity definition="T_room_1Sec" uom="ogc:def:unit:celsius"
+								sensorid="132" creationdate="2006-05-31" decimalplace="1" type="avg-1s"
+								lowerLimit="-10" upperLimit="70" mysqlid="132" />
+						</swe:component>
+						<swe:component name="W_speed_1Sec">
+							<swe:Quantity definition="W_speed_1Sec"
+								uom="urn:ogc:def:unit:meterPerSecond" sensorid="133" creationdate="2006-05-31"
+								decimalplace="1" type="avg-1s" lowerLimit="-0.05" upperLimit="60"
+								mysqlid="133" />
+						</swe:component>
+						<swe:component name="W_alpha_1Sec">
+							<swe:Quantity definition="W_alpha_1Sec" uom="urn:ogc:def:unit:degree"
+								sensorid="134" creationdate="2006-05-31" decimalplace="0" type="avg-1s"
+								lowerLimit="0" upperLimit="360" mysqlid="134" />
+						</swe:component>
+						<swe:component name="T_air_1Sec">
+							<swe:Quantity definition="T_air_1Sec" uom="ogc:def:unit:celsius"
+								sensorid="131" creationdate="2006-05-31" decimalplace="1" type="avg-1s"
+								lowerLimit="-10" upperLimit="50" mysqlid="131" />
+						</swe:component>
+						<swe:component name="G_pyrano1_1Sec">
+							<swe:Quantity definition="G_pyrano1_1Sec" uom="urn:ogc:def:unit:WperSm"
+								sensorid="122" creationdate="2006-05-31" decimalplace="0" type="avg-1s"
+								lowerLimit="-10" upperLimit="2000" mysqlid="122" />
+						</swe:component>
+					</swe:DataGroup>
+				</output>
+			</OutputList>
+		</outputs>
+		<!--================================= -->
+		<!-- System Communication Interfaces -->
+		<!--================================= -->
+		<interfaces>
+			<InterfaceList>
+				<connection>
+					<Link>
+						<source ref="192.168.2.102/media/m01/mem086/memory.mem" />
+						<destination ref="ftp" />
+					</Link>
+					<Link2>
+						<source ref="ucy00_weather" />
+						<destination ref="folder" />
+					</Link2>
+				</connection>
+			</InterfaceList>
+		</interfaces>
+	</System>
+</SensorML>

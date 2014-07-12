@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<SensorML xmlns:swe="http://www.opengis.net/swe" xmlns:gml="http://www.opengis.net/gml"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink"
+	xsi:schemaLocation="http://www.opengis.net/sensorML
+http://vast.uah.edu/schemas/sensorML/1.0.30/base/sensorML.xsd"
+	version="1.0">
+	<System id="urn:hh_1">
+		<!--============================ -->
+		<!-- Station Discovery Metadata -->
+		<!--============================ -->
+		<description>
+			<swe:Discussion>
+				Solar plant in Hamburg Germany.
+			</swe:Discussion>
+		</description>
+		<identification>
+			<IdentifierList>
+				<identifier name="shortName">
+					<Term qualifier="urn:ogc:def:identifier:shortName">
+					Solar plant in Hamburg Germany.
+					</Term>
+				</identifier>
+			</IdentifierList>
+		</identification>
+		<contact>
+			<ResponsibleParty gml:id="hendrik_contact">
+				<organizationName>Hendrik Adler - Sensetrace
+				</organizationName>
+				<contactInfo>
+					<address>
+						<electronicMailAddress>hendrikadler@arcor.de
+						</electronicMailAddress>
+					</address>
+				</contactInfo>
+			</ResponsibleParty>
+		</contact>
+		<swe:component name="urn:hh_1:fronius_ig_40">
+		</swe:component>
+		<swe:component name="urn:hh_1:fronius_ig_60">
+		</swe:component>
+		
+	</System>
+</SensorML>

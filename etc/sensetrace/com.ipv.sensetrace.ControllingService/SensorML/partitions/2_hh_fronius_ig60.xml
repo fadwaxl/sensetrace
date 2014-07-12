@@ -1,0 +1,111 @@
+<?xml version="1.0"?>
+<SensorML xmlns:swe="http://www.opengis.net/swe" xmlns:gml="http://www.opengis.net/gml"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink"
+	xsi:schemaLocation="http://www.opengis.net/sensorML
+http://vast.uah.edu/schemas/sensorML/1.0.30/base/sensorML.xsd"
+	version="1.0">
+	<System id="urn:hh_1:fronius_ig_60">
+		<!--============================ -->
+		<!-- Station Discovery Metadata -->
+		<!--============================ -->
+		<description>
+			<swe:Discussion>
+				Solarmodules of type Evergreen ES-195-RL. 
+				Inverters Fronius IG 60
+			</swe:Discussion>
+		</description>
+		<identification>
+			<IdentifierList>
+				<identifier name="longName">
+					<Term qualifier="urn:ogc:def:identifier:longName">
+						ES-195-RL
+					</Term>
+				</identifier>
+				<identifier name="shortName">
+					<Term qualifier="urn:ogc:def:identifier:shortName">
+						ES-195-RL
+					</Term>
+				</identifier>
+			</IdentifierList>
+		</identification>
+		<contact>
+			<ResponsibleParty gml:id="ipv_contact">
+				<organizationName>Hendrik Adler - Sensetrace
+				</organizationName>
+				<contactInfo>
+					<address>
+						<electronicMailAddress>hendrikadler@arcor.de
+						</electronicMailAddress>
+					</address>
+				</contactInfo>
+			</ResponsibleParty>
+		</contact>
+		<!--========================== -->
+		<!-- Station Coordinate Frame -->
+		<!--========================== -->
+
+		<!--================= -->
+		<!-- Station Outputs -->
+		<!--================= -->
+		<outputs>
+			<OutputList>
+				<output name="moduleMeasurements">
+
+					<swe:DataGroup>
+						<swe:component name="P_AC_5min">
+							<swe:Quantity definition="P_AC_IG60"
+								uom="ogc:def:unit:kilowatthours" sensorid="5" creationdate="2014-07-04"
+								decimalplace="0" type="avg-1s" lowerLimit="0" upperLimit="2100" statictest='false'
+								 csvarray="1,0" />
+						</swe:component>
+						
+		
+						<swe:component name="P_DC_5min">
+							<swe:Quantity definition="P_DC_IG60" uom="ogc:def:unit:watt"
+								sensorid="6" creationdate="2014-07-04" decimalplace="1" type="avg-1s"
+								lowerLimit="-10" upperLimit="2100" csvarray="1,1" />
+						</swe:component>
+						
+						
+						<swe:component name="E_AC_5min">
+							<swe:Quantity definition="E_AC_IG60"
+								uom="urn:ogc:def:unit:kilowatthours" sensorid="7" creationdate="2014-07-04"
+								decimalplace="3" type="avg-1s" lowerLimit="0" upperLimit="10000"
+								 csvarray="1,2" />
+						</swe:component>
+				
+
+						<swe:component name="V_DC_5min">
+							<swe:Quantity definition="V_DC_IG60" uom="ogc:def:unit:voltage"
+								sensorid="8" creationdate="2014-07-04" decimalplace="1" type="avg-1s"
+								lowerLimit="-10" upperLimit="350" csvarray="1,3" />
+						</swe:component>
+
+
+					</swe:DataGroup>
+				</output>
+			</OutputList>
+		</outputs>
+		<!--================================= -->
+		<!-- System Communication Interfaces -->
+		<!--================================= -->
+		<interfaces>
+			<InterfaceList>
+				<connection>
+					<Link>
+						<source ref="" />
+						<destination ref="ftp" />
+					</Link>
+					<Link2>
+						<source ref="" />
+						<destination ref="folder" />
+					</Link2>
+					<Link3>
+						<source ref="min" />
+						<destination ref="solarlogjs" />
+					</Link3>
+				</connection>
+			</InterfaceList>
+		</interfaces>
+	</System>
+</SensorML>

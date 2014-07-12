@@ -40,6 +40,9 @@
 			<xsl:variable name="sensorid">
 				<xsl:value-of select="*[local-name() = 'Quantity']/@sensorid" />
 			</xsl:variable>
+				<xsl:variable name="csvarray">
+				<xsl:value-of select="*[local-name() = 'Quantity']/@csvarray" />
+			</xsl:variable>
 			<xsl:variable name="creationdate">
 				<xsl:value-of select="*[local-name() = 'Quantity']/@creationdate" />
 			</xsl:variable>
@@ -103,6 +106,10 @@
 					rdf:datatype="http://www.w3.org/2001/XMLSchema#int">
 					<xsl:value-of select="$differencetopreviousvalue" />
 				</dc:differencetopreviousvalue>
+				<dc:csvarray
+					rdf:datatype="http://www.w3.org/2001/XMLSchema#int">
+					<xsl:value-of select="$csvarray" />
+				</dc:csvarray>
 
 
 			</rdf:description>

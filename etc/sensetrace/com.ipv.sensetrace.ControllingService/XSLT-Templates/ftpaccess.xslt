@@ -42,8 +42,8 @@
 					</dc:ftp>
 				</rdf:description>
 			</xsl:for-each>
+			
 			<xsl:for-each select="//*[local-name() = 'Link2']">
-
 				<xsl:variable name="definition2">
 					<xsl:value-of select="*[local-name() = 'source']/@ref" />
 				</xsl:variable>
@@ -52,6 +52,18 @@
 					<dc:dlfolderlink>
 						<xsl:value-of select="$definition2" />
 					</dc:dlfolderlink>
+				</rdf:description>
+			</xsl:for-each>
+			
+			<xsl:for-each select="//*[local-name() = 'Link3']">
+				<xsl:variable name="definition3">
+					<xsl:value-of select="*[local-name() = 'source']/@ref" />
+				</xsl:variable>
+				<xsl:text>&#xa;</xsl:text>
+				<rdf:description rdf:about='{$systemid}'>
+					<dc:solarlogfolderlink>
+						<xsl:value-of select="$definition3" />
+					</dc:solarlogfolderlink>
 				</rdf:description>
 			</xsl:for-each>
 		</xsl:template>
