@@ -1,4 +1,4 @@
-<?php include('auth/auth.php'); ?>
+<?php include ('auth/auth.php'); ?>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -20,7 +20,7 @@
 	<style>
 	
     body {
-        padding-top: 50px;
+       
     }
 	#target {
   margin: 2em;
@@ -69,12 +69,8 @@
     <style>
     </style>
  <!-- Include the required JavaScript libraries: -->
-     <script type="text/javascript"
-     src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js">
-    </script> 
-   
-    <script src="assets/js/bootstrap.js">
-    </script>
+    <script src='jquery/jquery.min.js' type="text/javascript"></script>
+    <script src="assets/js/bootstrap.js"></script>
     
     <script src='jquery/jquery-ui.custom.js' type="text/javascript"></script>
     <script src='jquery/jquery.cookie.js' type="text/javascript"></script>
@@ -453,6 +449,7 @@ $(function()
 				url: "GetDataPoints.php",
 				type: "GET",
 				dataType: "json",
+				async: false,
 				data:{timefrom:timefrom,
  			timeto:timeto,
 			errorcheck:errorcheck,
@@ -509,6 +506,7 @@ $(function()
 				url: "GetDataPoints.php",
 				type: "GET",
 				dataType: "json",
+				async: false,
 				data:{timefrom:timefrom,
  			timeto:timeto,
 			errorcheck:errorcheck,
@@ -567,6 +565,7 @@ $("#datacorrection").change(function() {
 				url: "GetDataPoints.php",
 				type: "GET",
 				dataType: "json",
+				async: false,
 				data:{timefrom:timefrom,
  			timeto:timeto,
 			errorcheck:errorcheck,
@@ -625,6 +624,7 @@ $("#datacorrection").change(function() {
 				url: "GetDataPoints.php",
 				type: "GET",
 				dataType: "json",
+				async: false,
 				data:{timefrom:timefrom,
  			timeto:timeto,
 			showerror:showerror,
@@ -682,6 +682,7 @@ $("#datacorrection").change(function() {
 				url: "GetDataPoints.php",
 				type: "GET",
 				dataType: "json",
+				async: false,
 				data:{timefrom:timefrom,
  			timeto:timeto,
 		  //timefrom:"2012-01-06T08:00:00",
@@ -707,7 +708,9 @@ $("#datacorrection").change(function() {
 			points: {
 				show: true
 			},
-			
+			legend: {
+				position: "nw"
+			},
 			  xaxes: [ {  mode: "time", timezone: "browser" } ],
     yaxes: [  {
                 tickFormatter: function (val, axis) {
@@ -797,6 +800,7 @@ var placeholder = $("#placeholder");
 				url: "GetDataPoints.php",
 				type: "GET",
 				dataType: "json",
+				async: false,
 				data:{timefrom:timefrom,
  			timeto:timeto,
 			showerror:showerror,
@@ -835,7 +839,7 @@ var placeholder = $("#placeholder");
 
 		alreadyFetched = {};
 
-    // --- Initialize sample trees
+    // --- Initialize  trees
     $("#tree").dynatree({
      checkbox: true,
 	 icon: false,
@@ -846,12 +850,15 @@ var placeholder = $("#placeholder");
 	 // Get a list of all selected nodes, and convert to a key array:
          selKeys = $.map(node.tree.getSelectedNodes(), function(node){
           return node.data.key;
-        });
+		  });
 		
-	
+			
+		anzahlKeys=selKeys.length;
 		child = [];
 		key1=selKeys.join(", ");
 		 key=node.data.key;
+		 
+		
 		
 		key_label=key;
 		  if( ! select ) //Wenn Node deaktiviert wird
@@ -933,9 +940,11 @@ $.plot("#overview", data2, options2);
 			 
 			 else //Wenn Node aktiviert wird
 			 {
+			 key_array.push(key);
 			 //Get all Children
 			 var k = 2;
 			 console.log("k=2");
+			 
 			  if (node.hasChildren()==true)
 			  { console.log("Child True");
 			 
@@ -950,7 +959,9 @@ $.plot("#overview", data2, options2);
 				}
 			 console.log("k1:");
 console.log(k);
-			 key_array.push(key);
+
+			//SQL Button aktivieren bei einem node bzw deaktivieren wenn mehrere nodes ausgewählt sind
+			 $('#download').attr("disabled",false);
 			
 			
 			 console.log(key);
@@ -1280,7 +1291,17 @@ console.log(n);
 
 }
 		
-
+ //SQL Button aktivieren bei einem node bzw deaktivieren wenn mehrere nodes oder keiner ausgewählt sind
+			if (anzahlKeys==1)
+			{
+			 $('#download').removeAttr("disabled");
+			 console.log("hello1");
+			 }
+			 else
+			 {
+			 console.log("hello2");
+			 $('#download').attr("disabled", "disabled");
+			 }
 			 
       },
 	  
@@ -1617,7 +1638,7 @@ $(function(){
 
 <script type="text/javascript">
 
-    $(document).ready(function() {
+  $(function(){
 
     $("#download").click(function() {
 
@@ -1625,25 +1646,25 @@ $(function(){
  if ($("#type").val()=="JSON")
    {link=$("#sql").val();
  
-   src="http://localhost:3030/data/query?query="+escape(link)+"&output=json&stylesheet=%2Fxml-to-html.xsl";
-  NeuesFenster=window.open(src,"json")
+   src="http://192.168.0.89:3030/data/query?query="+escape(link)+"&output=json&stylesheet=%2Fxml-to-html.xsl";
+   window.open(src,"json");
    }
    else
    {link=$("#sql").val();
-	 src="http://localhost:3030/data/query?query="+escape(link)+"&output=csv&stylesheet=%2Fxml-to-html.xsl";
-  NeuesFenster=window.open(src,"csv")   
+	 src="http://192.168.0.89:3030/data/query?query="+escape(link)+"&output=csv&stylesheet=%2Fxml-to-html.xsl";
+     window.open(src,"csv"); 
    }
+  return false;
     });
 
-    }
-    );
+    });
 
 </script>
 
   </head>
 
   <body class="yui-skin-sam">
-    <div class="navbar navbar-fixed-top navbar-inverse">
+    <div class="navbar navbar-static-top navbar-inverse">
       <div class="navbar-inner">
         <div class="container-fluid">
           <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -1791,7 +1812,7 @@ $(function(){
   <option>JSON</option>
   </select>
   
-  <button type="submit"  id="download" class="btn">Download</button>
+  <button type="submit"  id="download" class="btn" disabled='disabled'>Download</button>
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
      <label>Resolution:</label>
   <select id="resolution">
