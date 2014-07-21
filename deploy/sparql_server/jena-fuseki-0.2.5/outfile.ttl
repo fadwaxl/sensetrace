@@ -37,9 +37,9 @@ map:Configuration a d2rq:Configuration;
     
 map:database a d2rq:Database;
 	   d2rq:jdbcDriver "org.postgresql.Driver";
-	d2rq:jdbcDSN "jdbc:postgresql://127.0.0.1/pvdata";
-	d2rq:username "just_queries";
-	d2rq:password "sensetrace";
+	d2rq:jdbcDSN "jdbc:postgresql://127.0.0.1/sensetrace";
+	d2rq:username "postgres";
+	d2rq:password "postgres";
 	jdbc:autoReconnect "true";
 	jdbc:zeroDateTimeBehavior "convertToNull";
 	#d2rq:allowDistinct  "false";
