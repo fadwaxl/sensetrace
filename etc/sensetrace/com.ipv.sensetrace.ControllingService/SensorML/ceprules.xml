@@ -41,11 +41,11 @@ http://vast.uah.edu/schemas/sensorML/1.0.30/base/sensorML.xsd"
 		</identification>
 		<contact>
 			<ResponsibleParty gml:id="ipv_weather_station_contact">
-				<organizationName>Universität Stuttgart - Institut für Photovoltaik
+				<organizationName>Hendrik Adler
 				</organizationName>
 				<contactInfo>
 					<address>
-						<electronicMailAddress>hendrik.adler@ipv.uni-stuttgart.de
+						<electronicMailAddress>hendrikadler@arcor.de
 						</electronicMailAddress>
 					</address>
 				</contactInfo>
